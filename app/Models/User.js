@@ -7,6 +7,7 @@ const Model = use('Model')
 const Hash = use('Hash')
 
 class User extends Model {
+  
   static boot () {
     super.boot()
 
@@ -33,6 +34,20 @@ class User extends Model {
    */
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  static validationRules () {
+    const erroMessage = {
+      'username.required':'Nome de Usuário é obrigatório',
+      'username.min':'Nome de Usuário deve ter no mínimo 5 caracteres',
+      'username.unique':'Já existe um Usuário com esse Nome',
+      'email.required':'E-mail é obrigatório',
+      'email.email':'E-mail deve ser válido',
+      'email.unique':'Já existe um Usuário com esse E-mail',
+      'password.required':'Senha é obrigatória',
+      'password.min':'Senha deve ter no mínimo 5 caracteres',
+    }
+    return erroMessage
   }
 }
 

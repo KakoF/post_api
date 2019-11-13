@@ -16,7 +16,13 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('users', 'UserController.create')
+Route.post('register', 'UserController.register')
+Route.post('login', 'UserController.login')
+Route.get('logout', 'UserController.logout')
+
+
+
+Route.resouce('post', 'PostController').apiOnly().middleware('auth')
 
 
 /*Route.get('/', () => {
