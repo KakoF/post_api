@@ -81,6 +81,11 @@ class PostController {
   async show ({ params, auth, response }) {
     try {
       const post = await Post.find(params.id)
+      if(!post){
+        return response
+        .status(500)
+        .send({ erro: `Erro: Post não encontrado` })
+      }
       if (post.user_id !== auth.user.id) {
         return response.status(401).send({ message: 'Operação não permitida' })
       }
@@ -102,7 +107,12 @@ class PostController {
    */
   async update ({ request, params, auth, response }) {
     try {
-      const post = await Post.findOrFail(params.id)
+      const post = await Post.find(params.id)
+      if(!post){
+        return response
+        .status(500)
+        .send({ erro: `Erro: Post não encontrado` })
+      }
       if (post.user_id !== auth.user.id) {
         return response.status(401).send({ message: 'Operação não permitida' })
       }
@@ -129,11 +139,16 @@ class PostController {
    */
   async destroy ({ params, auth, response }) {
     try {
-      const post = await Post.findOrFail(params.id);
+      const post = await Post.find(params.id)
+      if(!post){
+        return response
+        .status(500)
+        .send({ erro: `Erro: Post não encontrado` })
+      }
       if (post.user_id !== auth.user.id) {
         return response.status(401).send({ message: 'Operação não permitida' })
       }
-      await post.delete();
+      return await post.delete();
     } catch (err) {
       return response
         .status(500)
