@@ -40,6 +40,10 @@ class User extends Model {
     return this.hasMany('App/Models/Post')
   }
 
+  users () {
+    return this.hasOne('App/Models/Profile')
+  }
+
   static validationRules () {
     const erroMessage = {
       'username.required':'Nome de Usuário é obrigatório',

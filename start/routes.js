@@ -24,6 +24,7 @@ Route.get('logout', 'UserController.logout').middleware('auth')
 
 Route.get('/', 'PostController.posts')
 Route.resource('post', 'PostController').apiOnly().middleware('auth')
+Route.resource('profile', 'ProfileController').only(['show', 'store', 'update']).middleware('auth')
 
 
 /*Route.get('/', () => {
