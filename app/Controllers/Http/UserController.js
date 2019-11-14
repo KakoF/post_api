@@ -30,13 +30,25 @@ class UserController {
     try {
 
       const {email, password} = request.all()
-      const token = auth.attempt(email, password)
+      const token = auth.withRefreshToken().attempt(email, password)
+      //const token = auth.attempt(email, password)
       return token
 
     } catch (err) {
         return response
           .status(500)
           .send({erro: `Erro: ${err.message}`})
+    }
+  }
+
+  async refresh ({ request, response, auth }) {
+    try {
+    const refreshToken = request.input('refresh_token')
+    return await auth.generateForRefreshToken(refreshToken)
+    } catch (err) {
+      return response
+        .status(500)
+        .send({ erro: `Erro: ${err.message}` })
     }
   }
 

@@ -18,7 +18,8 @@ const Route = use('Route')
 
 Route.post('register', 'UserController.register')
 Route.post('login', 'UserController.login')
-Route.get('logout', 'UserController.logout')
+Route.post('refresh', 'UserController.refresh').middleware('auth')
+Route.get('logout', 'UserController.logout').middleware('auth')
 
 
 
