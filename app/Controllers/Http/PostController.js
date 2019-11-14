@@ -32,6 +32,17 @@ class PostController {
     }
   }
 
+  async posts ({ request, response, auth }) {
+    try {
+      const posts = await Post.query().with('users', (builder) => builder.select('id', 'username')).orderBy('created_at', 'desc').fetch()
+      return posts
+    } catch (err) {
+      return response
+        .status(500)
+        .send({ erro: `Erro: ${err.message}` })
+    }
+  }
+
   /**
    * Create/save a new post.
    * POST posts

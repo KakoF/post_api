@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Post extends Model {
 
-  user () {
+  users () {
     return this.belongsTo('App/Models/User')
   }
 }

@@ -22,7 +22,7 @@ Route.post('refresh', 'UserController.refresh').middleware('auth')
 Route.get('logout', 'UserController.logout').middleware('auth')
 
 
-
+Route.get('/', 'PostController.posts')
 Route.resource('post', 'PostController').apiOnly().middleware('auth')
 
 
