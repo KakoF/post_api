@@ -3,7 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const Profile = use('App/Models/Profile')
 /**
  * Resourceful controller for interacting with profiles
  */
@@ -18,7 +18,15 @@ class ProfileController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async index ({ response }) {
+    try {
+      const profile = await Profile.findByOrFail('user_id', 1)
+      return profile
+    } catch (err) {
+      return response
+        .status(500)
+        .send({ erro: `Erro: ${err.message}` })
+    }
   }
 
   /**
@@ -30,6 +38,7 @@ class ProfileController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    return 'profile store'
   }
 
   /**
@@ -41,6 +50,7 @@ class ProfileController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    return 'profile update'
   }
 }
 
