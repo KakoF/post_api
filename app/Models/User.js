@@ -36,6 +36,10 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
+  posts () {
+    return this.hasMany('App/Models/Post')
+  }
+
   static validationRules () {
     const erroMessage = {
       'username.required':'Nome de Usuário é obrigatório',
