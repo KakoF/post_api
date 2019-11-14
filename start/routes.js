@@ -22,7 +22,7 @@ Route.get('logout', 'UserController.logout')
 
 
 
-Route.resouce('post', 'PostController').apiOnly().middleware('auth')
+Route.resource('post', 'PostController').apiOnly().middleware('auth')
 
 
 /*Route.get('/', () => {
