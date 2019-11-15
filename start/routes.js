@@ -27,6 +27,8 @@ Route.resource('post', 'PostController').apiOnly().middleware('auth')
 Route.resource('perfil', 'ProfileController').only(['index', 'store']).middleware('auth')
 
 
+
+
 /*Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })*/
