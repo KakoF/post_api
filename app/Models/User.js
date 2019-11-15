@@ -40,8 +40,12 @@ class User extends Model {
     return this.hasMany('App/Models/Post')
   }
 
-  users () {
+  profile () {
     return this.hasOne('App/Models/Profile')
+  }
+
+  role () {
+    return this.belongsTo('App/Models/Role')
   }
 
   static validationRules () {

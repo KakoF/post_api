@@ -9,6 +9,11 @@ class AlterPostSchema extends Schema {
       table.string('image').nullable()
     })
   }
+   down () {
+    this.table('posts', (table) => {
+      // reverse alternations
+    })
+  }
 }
 
 module.exports = AlterPostSchema
