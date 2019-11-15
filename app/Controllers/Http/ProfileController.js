@@ -18,9 +18,9 @@ class ProfileController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ response }) {
+  async index ({ response, auth }) {
     try {
-      const profile = await Profile.findByOrFail('user_id', 1)
+      const profile = await Profile.query().where('user_id', auth.user.id).fetch()
       return profile
     } catch (err) {
       return response
@@ -37,20 +37,23 @@ class ProfileController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
-    return 'profile store'
-  }
-
-  /**
-   * Update profile details.
-   * PUT or PATCH profiles/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async update ({ params, request, response }) {
-    return 'profile update'
+  async store ({ request, response, auth }) {
+    try {
+      const data = request.only(["avatar"])
+      const profile = await Profile.findBy('user_id', auth.user.id)
+      if(profile){
+        profile.merge(data);
+        return await profile.save()
+      }else{
+        const { id } = auth.user
+        const new_profile = await Profile.create({user_id: id, avatar: data })
+        return new_profile
+      }
+    } catch (err) {
+      return response
+        .status(500)
+        .send({ erro: `Erro: ${err.message}` })
+    }
   }
 }
 
