@@ -3,6 +3,7 @@
 
 
 const Post = use('App/Models/Post')
+const Helpers = use('Helpers')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -60,6 +61,25 @@ class PostController {
         'conteudo'
       ])
 
+      const postPic = request.file('post_pic', {
+        types: ['image'],
+        size: '10mb'
+      })
+      
+      if(postPic) {
+        
+        await postPic.move(Helpers.tmpPath(`post/${id}`), {
+          name: `${Date.now()}-${data.titulo}.jpg`,
+          overwrite: true
+        })
+       
+        if (!postPic.moved()) {
+          return response
+          .status(500)
+          .send({ erro: `Erro: ${err.message}` })
+        }
+        data.image = postPic.fileName
+      }
       const post = await Post.create({ ...data, user_id: id })
       return post
     } catch (err) {

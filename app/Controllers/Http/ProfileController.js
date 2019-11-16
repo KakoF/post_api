@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 const Profile = use('App/Models/Profile')
+const Helpers = use('Helpers')
+
 /**
  * Resourceful controller for interacting with profiles
  */
@@ -39,10 +41,32 @@ class ProfileController {
    */
   async store ({ request, response, auth }) {
     try {
-      const data = request.only(["avatar"])
+      
+      let data = null
       const profile = await Profile.findBy('user_id', auth.user.id)
+
+      const profilePic = request.file('avatar', {
+        types: ['image'],
+        size: '10mb'
+      })
+      
+      if(profilePic) {
+        
+        await profilePic.move(Helpers.tmpPath(`profile/${auth.user.id}`), {
+          name: `profile${auth.user.id}.jpg`,
+          overwrite: true
+        })
+       
+        if (!profilePic.moved()) {
+          return response
+          .status(500)
+          .send({ erro: `Erro: ${err.message}` })
+        }
+        data = `${profilePic.fileName}_${Date.now()}`
+      }
+
       if(profile){
-        profile.merge(data);
+        profile.avatar = data
         return await profile.save()
       }else{
         const { id } = auth.user
