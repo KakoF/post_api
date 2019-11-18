@@ -8,6 +8,21 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
 4. Lucid ORM
 5. Migrations and seeds
 
+# Server Requeriments
+
+Read https://adonisjs.com/docs/4.1/installation
+
+OR Follow Steps:
+
+* Node.js >= 8.0.0
+* npm >= 3.0.0
+https://nodejs.org/en/
+
+* CLI AdonisJs
+
+npm i -g @adonisjs/cli
+
+
 ## Setup
 
 Clone the repo and then run
@@ -15,6 +30,17 @@ Clone the repo and then run
 ```bash
 npm install
 ```
+
+
+## Database
+
+This simple API using Postgre database and using PG driver. You can change!
+
+Docs: https://adonisjs.com/docs/3.2/database-setup
+
+Just install driver and change default driver name in .env file
+DB_CONNECTION=pg
+
 
 ### Migrations
 
