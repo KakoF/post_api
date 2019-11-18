@@ -15,7 +15,7 @@ const Database = use('Database')
 
 class RoleSeeder {
   async run () {
-    /*await Database.table('roles').insert([
+    await Database.table('roles').insert([
     {
      
       role_name: 'Administrador',
@@ -27,7 +27,7 @@ class RoleSeeder {
       created_at : new Date(),
       updated_at: new Date()
     }
-    ])*/
+    ])
   }
 }
 

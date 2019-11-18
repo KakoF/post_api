@@ -15,7 +15,7 @@ const Database = use('Database')
 const Hash = use('Hash')
 class UserSeeder {
   async run () {
-    /*await Database.table('users').insert([
+    await Database.table('users').insert([
       {
         username: 'Kako',
         email: 'kakoferrare87@gmail.com',
@@ -24,7 +24,7 @@ class UserSeeder {
         created_at : new Date(),
         updated_at: new Date()
       }
-      ])*/
+      ])
   }
 }
 
