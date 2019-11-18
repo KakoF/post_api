@@ -5,7 +5,7 @@ const Schema = use('Schema')
 
 class AlterUserSchema extends Schema {
   up () {
-    this.table('users', (table) => {
+    this.alter('users', (table) => {
       table.integer('role_id').unsigned().references('id').
       inTable('roles')
     })
