@@ -23,7 +23,22 @@ Route.get('logout', 'UserController.logout').middleware('auth')
 
 
 Route.get('/', 'PostController.posts')
+
 Route.resource('post', 'PostController').apiOnly().middleware('auth')
+
+/* Alternativa de agrupamento de rotas de POST de rotas, não utilizando o resource
+
+Route.group(() => {
+  Route.get('/', 'PostController.index')
+  Route.get('/:id', 'PostController.show')
+  Route.post('/', 'PostController.store')
+  Route.put('/:id', 'PostController.update')
+  Route.delete('/:id', 'PostController.destroy')
+}).prefix('post').middleware('auth')
+
+*/
+
+
 Route.resource('perfil', 'ProfileController').only(['index', 'store']).middleware('auth')
 
 Route.post('comentario/:post_id', 'CommentController.store').middleware('auth')
