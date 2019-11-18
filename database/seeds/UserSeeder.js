@@ -17,6 +17,7 @@ class UserSeeder {
   async run () {
     await Database.table('users').insert([
       {
+        id: 1,
         username: 'Kako',
         email: 'kakoferrare87@gmail.com',
         password: await Hash.make('kako3004'),

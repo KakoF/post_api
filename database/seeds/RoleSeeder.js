@@ -17,12 +17,13 @@ class RoleSeeder {
   async run () {
     await Database.table('roles').insert([
     {
-     
+      id: 1,
       role_name: 'Administrador',
       created_at : new Date(),
       updated_at: new Date()
     },
     {
+      id: 2,
       role_name: 'Usuário',
       created_at : new Date(),
       updated_at: new Date()
