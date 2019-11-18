@@ -26,6 +26,9 @@ Route.get('/', 'PostController.posts')
 Route.resource('post', 'PostController').apiOnly().middleware('auth')
 Route.resource('perfil', 'ProfileController').only(['index', 'store']).middleware('auth')
 
+Route.post('comentario/:post_id', 'CommentController.store').middleware('auth')
+Route.put('comentario/:post_id/:id', 'CommentController.update').middleware('auth')
+
 
 
 

@@ -9,30 +9,6 @@
  */
 class CommentController {
   /**
-   * Show a list of all comments.
-   * GET comments
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index ({ request, response, view }) {
-  }
-
-  /**
-   * Render a form to be used for creating a new comment.
-   * GET comments/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
-  }
-
-  /**
    * Create/save a new comment.
    * POST comments
    *
@@ -40,33 +16,12 @@ class CommentController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
-  }
+  async store ({ params, request, response }) {
 
-  /**
-   * Display a single comment.
-   * GET comments/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
-  }
+    //return params.post_id
+    return 'store'
 
-  /**
-   * Render a form to update an existing comment.
-   * GET comments/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
   }
-
   /**
    * Update comment details.
    * PUT or PATCH comments/:id
@@ -76,6 +31,10 @@ class CommentController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+
+    //return params.post_id
+    //return params.id
+    return 'update'
   }
 
   /**
