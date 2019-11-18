@@ -57,9 +57,14 @@ Run the following command to populate base init.
 ```js
 adonis seed
 ```
-
+User admin
 ```admin
 username: admin
 email: admin@admin.com
 password: admin1234
+```
+
+To run local:
+```admin
+adonis serve --dev
 ```
