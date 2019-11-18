@@ -18,9 +18,9 @@ class UserSeeder {
     await Database.table('users').insert([
       {
         id: 1,
-        username: 'Kako',
-        email: 'kakoferrare87@gmail.com',
-        password: await Hash.make('kako3004'),
+        username: 'admin',
+        email: 'admin@admin.com',
+        password: await Hash.make('admin1234'),
         role_id: 1,
         created_at : new Date(),
         updated_at: new Date()

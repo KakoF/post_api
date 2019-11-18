@@ -57,3 +57,9 @@ Run the following command to populate base init.
 ```js
 adonis seed
 ```
+
+```admin
+username: admin
+email: admin@admin.com
+password: admin1234
+```
