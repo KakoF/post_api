@@ -16,12 +16,14 @@ OR Follow Steps:
 
 * Node.js >= 8.0.0
 * npm >= 3.0.0
-https://nodejs.org/en/
+
+- https://nodejs.org/en/
 
 * CLI AdonisJs
 
+```bash
 npm i -g @adonisjs/cli
-
+```
 
 ## Setup
 
