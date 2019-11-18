@@ -31,7 +31,15 @@ Clone the repo and then run
 
 ```bash
 npm install
+```
 
+## Configure your .env
+Copy and past your .env.example and rename to .env
+
+Set environment variables in .env file
+ 
+Run
+```key:generate
 adonis key:generate
 ```
 
@@ -44,12 +52,6 @@ Docs: https://adonisjs.com/docs/3.2/database-setup
 
 Just install driver and change default driver name in .env file
 DB_CONNECTION=pg
-
-
-## Configure your .env
-Copy and past your .env.example and rename to .env
-
-Set environment variables in .env file
 
 
 ### Migrations
