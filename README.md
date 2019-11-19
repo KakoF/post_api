@@ -34,7 +34,7 @@ npm install
 ```
 
 ## Configure your .env
-Copy and past your .env.example and rename to .env
+Copy and past your .env.example and rename it to .env
 
 Set environment variables in .env file
  
@@ -46,13 +46,11 @@ adonis key:generate
 
 ## Database
 
-This simple API using Postgre database and using PG driver. You can change!
+This API uses Postgre database by default.
+
+You can change it by simply installing any database driver supported by AdonisJs and changing the default database's parameters at .env file.
 
 Docs: https://adonisjs.com/docs/3.2/database-setup
-
-Just install driver and change default driver name in .env file
-DB_CONNECTION=pg
-
 
 ### Migrations
 
