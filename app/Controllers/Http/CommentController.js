@@ -3,7 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const { validateAll } = use('Validator')
 const Post = use('App/Models/Post')
 const Comment = use('App/Models/Comment')
 /**
@@ -21,6 +21,13 @@ class CommentController {
   async store ({ params, request, response, auth }) {
     //return params.post_id
     try {
+      const validation = await validateAll(request.all(), {
+        comentario: 'required|min:1',
+      }, Comment.validationRules())
+
+      if (validation.fails()) {
+        return response.status(401).send({ message: validation.messages() })
+      }
       const post = await Post.find(params.post_id)
       if(!post){
         return response
@@ -49,6 +56,13 @@ class CommentController {
     //return params.post_id
     //return params.id
     try {
+      const validation = await validateAll(request.all(), {
+        comentario: 'required|min:1',
+      }, Comment.validationRules())
+
+      if (validation.fails()) {
+        return response.status(401).send({ message: validation.messages() })
+      }
       const post = await Post.find(params.post_id)
       if(!post){
         return response

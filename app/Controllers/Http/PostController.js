@@ -1,7 +1,7 @@
 'use strict'
 
 
-
+const { validateAll } = use('Validator')
 const Post = use('App/Models/Post')
 const Helpers = use('Helpers')
 
@@ -54,6 +54,15 @@ class PostController {
    */
   async store ({ request, response, auth }) {
     try {
+
+      const validation = await validateAll(request.all(), {
+        titulo: 'required|min:1',
+        conteudo: 'required|min:1'
+      }, Post.validationRules())
+
+      if (validation.fails()) {
+        return response.status(401).send({ message: validation.messages() })
+      }
       const { id } = auth.user
       const data = request.only([
         'titulo',
@@ -129,6 +138,14 @@ class PostController {
    */
   async update ({ request, params, auth, response }) {
     try {
+      const validation = await validateAll(request.all(), {
+        titulo: 'required|min:1',
+        conteudo: 'required|min:1'
+      }, Post.validationRules())
+
+      if (validation.fails()) {
+        return response.status(401).send({ message: validation.messages() })
+      }
       const post = await Post.find(params.id)
       if(!post){
         return response
