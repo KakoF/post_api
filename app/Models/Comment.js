@@ -7,6 +7,9 @@ class Comment extends Model {
   users () {
     return this.belongsTo('App/Models/User')
   }
+  posts () {
+    return this.belongsTo('App/Models/Post')
+  }
 }
 
 module.exports = Comment

@@ -100,7 +100,9 @@ class PostController {
    */
   async show ({ params, auth, response }) {
     try {
-      const post = await Post.find(params.id)
+      const post = await Post.query().where('id', params.id)
+        .with('users', (builder) => {builder.select('id', 'username')})
+        .with('comments', (builder) => {builder.select('post_id', 'id', 'comentario')}).first()
       if(!post){
         return response
         .status(500)
