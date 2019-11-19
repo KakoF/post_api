@@ -35,7 +35,10 @@ class PostController {
 
   async posts ({ request, response, auth }) {
     try {
-      const posts = await Post.query().with('users', (builder) => builder.select('id', 'username')).orderBy('created_at', 'desc').fetch()
+      const posts = await Post.query()
+        .with('users', (builder) => builder.select('id', 'username'))
+        .withCount('comments')
+        .orderBy('created_at', 'desc').fetch()
       return posts
     } catch (err) {
       return response
