@@ -89,7 +89,7 @@ class CommentController {
         .status(500)
         .send({ erro: `Erro: ${err.message}` })
     }
-    return 'update'
+    
   }
 
   /**

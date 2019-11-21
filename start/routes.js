@@ -23,6 +23,7 @@ Route.get('logout', 'UserController.logout').middleware('auth')
 
 
 Route.get('/', 'PostController.posts')
+Route.get('perfil/:user_id', 'ProfileController.show')
 
 Route.resource('post', 'PostController').apiOnly().middleware('auth')
 
