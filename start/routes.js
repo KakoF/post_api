@@ -18,6 +18,10 @@ const Route = use('Route')
 
 Route.post('register', 'UserController.register')
 Route.post('login', 'UserController.login')
+
+Route.get('image/:id/:path', 'ImageController.index')
+//Route.get('image', 'ImageController.index')
+
 Route.post('refresh', 'UserController.refresh').middleware('auth')
 Route.get('logout', 'UserController.logout').middleware('auth')
 
@@ -26,6 +30,7 @@ Route.get('/posts', 'PostController.posts')
 Route.get('perfil/:user_id', 'ProfileController.show')
 
 Route.resource('post', 'PostController').apiOnly().middleware('auth')
+
 
 /* Alternativa de agrupamento de rotas de POST de rotas, não utilizando o resource
 
