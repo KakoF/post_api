@@ -10,6 +10,14 @@ class Comment extends Model {
   posts () {
     return this.belongsTo('App/Models/Post')
   }
+
+  static validationRules () {
+    const erroMessage = {
+      'comentario.required': 'Comentário é obrigatório',
+      'comentario.min': 'Comentário deve ter no mínimo 1 caractere',
+    }
+    return erroMessage
+  }
 }
 
 module.exports = Comment

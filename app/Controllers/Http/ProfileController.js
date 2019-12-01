@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 const Profile = use('App/Models/Profile')
+const User = use('App/Models/User')
+const Database = use('Database')
 const Helpers = use('Helpers')
 
 /**
@@ -22,8 +24,37 @@ class ProfileController {
    */
   async index ({ response, auth }) {
     try {
-      const profile = await Profile.query().where('user_id', auth.user.id).fetch()
-      return profile
+      let data = {}
+      data.profile = await Profile.find(auth.user.id)
+      if (data.profile) {
+        data.user = await User.query().select('id', 'username').where('id', data.profile.user_id)
+          .withCount('posts')
+          .withCount('comments')
+          .fetch()
+        data.posts = await Database.from('posts').count()
+        data.comments = await Database.from('comments').count()
+      }
+      return data
+    } catch (err) {
+      return response
+        .status(500)
+        .send({ erro: `Erro: ${err.message}` })
+    }
+  }
+
+  async show ({ response, params }) {
+    try {
+      let data = {}
+      data.profile = await Profile.find(params.user_id)
+      if (data.profile) {
+        data.user = await User.query().select('id', 'username').where('id', data.profile.user_id)
+        .withCount('posts')
+        .withCount('comments')
+        .fetch()
+      data.posts = await Database.from('posts').count()
+      data.comments = await Database.from('comments').count()
+      }
+      return data
     } catch (err) {
       return response
         .status(500)

@@ -40,6 +40,10 @@ class User extends Model {
     return this.hasMany('App/Models/Post')
   }
 
+  comments () {
+    return this.hasMany('App/Models/Comment')
+  }
+
   profile () {
     return this.hasOne('App/Models/Profile')
   }

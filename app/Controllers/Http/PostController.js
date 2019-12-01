@@ -1,7 +1,7 @@
 'use strict'
 
 
-
+const { validateAll } = use('Validator')
 const Post = use('App/Models/Post')
 const Helpers = use('Helpers')
 
@@ -35,7 +35,10 @@ class PostController {
 
   async posts ({ request, response, auth }) {
     try {
-      const posts = await Post.query().with('users', (builder) => builder.select('id', 'username')).orderBy('created_at', 'desc').fetch()
+      const posts = await Post.query()
+        .with('users', (builder) => builder.select('id', 'username'))
+        .withCount('comments')
+        .orderBy('created_at', 'desc').fetch()
       return posts
     } catch (err) {
       return response
@@ -54,6 +57,15 @@ class PostController {
    */
   async store ({ request, response, auth }) {
     try {
+
+      const validation = await validateAll(request.all(), {
+        titulo: 'required|min:1',
+        conteudo: 'required|min:1'
+      }, Post.validationRules())
+
+      if (validation.fails()) {
+        return response.status(401).send({ message: validation.messages() })
+      }
       const { id } = auth.user
       const data = request.only([
         'titulo',
@@ -129,6 +141,14 @@ class PostController {
    */
   async update ({ request, params, auth, response }) {
     try {
+      const validation = await validateAll(request.all(), {
+        titulo: 'required|min:1',
+        conteudo: 'required|min:1'
+      }, Post.validationRules())
+
+      if (validation.fails()) {
+        return response.status(401).send({ message: validation.messages() })
+      }
       const post = await Post.find(params.id)
       if(!post){
         return response
