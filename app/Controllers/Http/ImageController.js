@@ -3,8 +3,11 @@
 const Helpers = use('Helpers')
 
 class ImageController {
-    async index ({ params, response }) {
+    async posts ({ params, response }) {
         return response.download(Helpers.tmpPath(`post/${params.id}/${params.path}`))
+    }
+    async perfil ({ params, response }) {
+        return response.download(Helpers.tmpPath(`profile/${params.id}/${params.path}`))
     }
 }
 

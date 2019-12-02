@@ -19,7 +19,8 @@ const Route = use('Route')
 Route.post('register', 'UserController.register')
 Route.post('login', 'UserController.login')
 
-Route.get('image/:id/:path', 'ImageController.index')
+Route.get('post/:id/:path', 'ImageController.posts')
+Route.get('perfil/:id/:path', 'ImageController.perfil')
 //Route.get('image', 'ImageController.index')
 
 Route.post('refresh', 'UserController.refresh').middleware('auth')

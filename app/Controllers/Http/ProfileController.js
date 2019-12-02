@@ -93,7 +93,7 @@ class ProfileController {
           .status(500)
           .send({ erro: `Erro: ${err.message}` })
         }
-        data = `${profilePic.fileName}_${Date.now()}`
+        data = `${profilePic.fileName}`
       }
 
       if(profile){
