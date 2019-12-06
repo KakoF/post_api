@@ -33,12 +33,13 @@ class PostController {
     }
   }
 
-  async posts ({ request, response, auth }) {
+  async posts ({ params, response, auth }) {
     try {
       const posts = await Post.query()
         .with('users', (builder) => builder.select('id', 'username').with('profile'))
         .withCount('comments')
-        .orderBy('created_at', 'desc').fetch()
+        //.orderBy('created_at', 'desc').fetch()
+        .orderBy('created_at', 'desc').paginate(params.page, 12)
       return posts
     } catch (err) {
       return response

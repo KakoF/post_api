@@ -27,7 +27,7 @@ Route.post('refresh', 'UserController.refresh').middleware('auth')
 Route.get('logout', 'UserController.logout').middleware('auth')
 
 
-Route.get('/posts', 'PostController.posts')
+Route.get('/posts/:page', 'PostController.posts')
 Route.get('perfil/:user_id', 'ProfileController.show')
 
 Route.resource('post', 'PostController').apiOnly().middleware('auth')
