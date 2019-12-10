@@ -30,9 +30,9 @@ class UserController {
     try {
 
       const {email, password} = request.all()
-      const token = auth.withRefreshToken().attempt(email, password)
-      //const token = auth.attempt(email, password)
-      return token
+      const token = await auth.withRefreshToken().attempt(email, password)
+      let user = await User.findBy('email', email)
+      return { token, user: { email: user.email, username: user.username } }
 
     } catch (err) {
         return response
