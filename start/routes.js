@@ -23,7 +23,7 @@ Route.get('post/:id/:path', 'ImageController.posts')
 Route.get('perfil/:id/:path', 'ImageController.perfil')
 //Route.get('image', 'ImageController.index')
 
-Route.post('refresh', 'UserController.refresh').middleware('auth')
+Route.post('refresh', 'UserController.refresh')
 Route.get('logout', 'UserController.logout').middleware('auth')
 Route.get('user', 'UserController.user').middleware('auth')
 
