@@ -25,6 +25,20 @@ class UserController {
           .send({erro: `Erro: ${err.message}`})
     }
   }
+   async login ({ request, response, auth }) {
+    try {
+
+      const { email, password } = request.all()
+      const token = await auth.withRefreshToken().attempt(email, password)
+      return token
+
+    } catch (err) {
+      return response
+        .status(500)
+        .send({ erro: `Erro: ${err.message}` })
+    }
+  }
+
 
   /*async login ({ request, response, auth }) {
     try {
@@ -56,20 +70,7 @@ class UserController {
     }
   }
 
-  async login ({ request, response, auth }) {
-    try {
-
-      const { email, password } = request.all()
-      const token = await auth.withRefreshToken().attempt(email, password)
-      return token
-
-    } catch (err) {
-      return response
-        .status(500)
-        .send({ erro: `Erro: ${err.message}` })
-    }
-  }
-
+ 
   async refresh ({ request, response, auth }) {
     try {
     const refreshToken = request.input('refresh_token')
