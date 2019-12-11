@@ -25,6 +25,7 @@ Route.get('perfil/:id/:path', 'ImageController.perfil')
 
 Route.post('refresh', 'UserController.refresh').middleware('auth')
 Route.get('logout', 'UserController.logout').middleware('auth')
+Route.get('user', 'UserController.user').middleware('auth')
 
 
 Route.get('/posts/:page', 'PostController.posts')
