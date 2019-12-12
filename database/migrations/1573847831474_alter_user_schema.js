@@ -8,6 +8,7 @@ class AlterUserSchema extends Schema {
     this.alter('users', (table) => {
       table.integer('role_id').unsigned().references('id').
       inTable('roles')
+      //.defaultTo(2)
     })
   }
 
