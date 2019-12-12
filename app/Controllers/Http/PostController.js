@@ -24,7 +24,7 @@ class PostController {
    */
   async index ({ request, response, auth }) {
     try {
-    const posts = await Post.query().where('user_id', auth.user.id).fetch()
+    const posts = await Post.query().where('user_id', auth.user.id).withCount('comments').fetch()
     return posts
     } catch (err) {
       return response
