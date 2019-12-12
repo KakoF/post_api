@@ -55,21 +55,25 @@ class UserController {
     }
   }*/
 
+  
   async user ({ response, auth }) {
     try {
 
-      const user = await auth.getUser()
-      return {
-        user: { username: user.username, email: user.email}
+      const userAuth = await auth.getUser()
+      if(userAuth){
+        const user = await User.query().select('username', 'email').where('id', userAuth.id).with('role', (builder) => builder.select('role')).fetch()
+        return {user: user}
+      }else{
+        return response
+        .status(500)
+        .send({erro: `Erro: Usuário não autenticado`})
       }
-
     } catch (err) {
         return response
           .status(500)
           .send({erro: `Erro: ${err.message}`})
     }
   }
-
  
   async refresh ({ request, response, auth }) {
     try {
