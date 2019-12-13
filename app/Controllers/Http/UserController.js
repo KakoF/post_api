@@ -61,7 +61,7 @@ class UserController {
 
       const userAuth = await auth.getUser()
       if(userAuth){
-        const user = await User.query().select('username', 'email').where('id', userAuth.id).with('role', (builder) => builder.select('role')).fetch()
+        const user = await User.query().select('username', 'email', 'role_id').where('id', userAuth.id).with('role', (builder) => builder.select('id', 'role_name')).fetch()
         return {user: user}
       }else{
         return response
