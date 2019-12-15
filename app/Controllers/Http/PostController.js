@@ -78,7 +78,6 @@ class PostController {
         types: ['image'],
         size: '10mb'
       })
-      
       if(postPic) {
         
         await postPic.move(Helpers.tmpPath(`post/${id}`), {
@@ -151,6 +150,7 @@ class PostController {
         return response.status(401).send({ message: validation.messages() })
       }
       const post = await Post.find(params.id)
+      
       if(!post){
         return response
         .status(500)
@@ -160,6 +160,25 @@ class PostController {
         return response.status(401).send({ message: 'Operação não permitida' })
       }
       const data = request.only(["titulo", "sub_titulo", "conteudo"])
+
+      const postPic = request.file('post_pic', {
+        types: ['image'],
+        size: '10mb'
+      })
+      if(postPic) {
+        
+        await postPic.move(Helpers.tmpPath(`post/${params.id}`), {
+          name: post.image,
+          overwrite: true
+        })
+       
+        if (!postPic.moved()) {
+          return response
+          .status(500)
+          .send({ erro: `Erro: ${err.message}` })
+        }
+        data.image = postPic.fileName
+      }
 
       post.merge(data);
       await post.save();
