@@ -121,7 +121,7 @@ class PostController {
         .send({ erro: `Erro: Post não encontrado` })
       }
       if (post.user_id !== auth.user.id) {
-        return response.status(403).send({ erro: 'Operação não é permitida' })
+        return response.status(403).send({erro: 'Operação não é permitida'})
       }
       return post
     } catch (err) {
