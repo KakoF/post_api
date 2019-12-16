@@ -167,7 +167,7 @@ class PostController {
       })
       if(postPic) {
         
-        await postPic.move(Helpers.tmpPath(`post/${params.id}`), {
+        await postPic.move(Helpers.tmpPath(`post/${auth.user.id}`), {
           name: post.image,
           overwrite: true
         })
