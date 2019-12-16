@@ -121,7 +121,7 @@ class PostController {
         .send({ erro: `Erro: Post não encontrado` })
       }
       if (post.user_id !== auth.user.id) {
-        return response.status(403).send({ error: 'Operação não é permitida' })
+        return response.status(403).send({ erro: 'Operação não é permitida' })
       }
       return post
     } catch (err) {
@@ -157,7 +157,7 @@ class PostController {
         .send({ erro: `Erro: Post não encontrado` })
       }
       if (post.user_id !== auth.user.id) {
-        return response.status(403).send({ message: 'Operação não é permitida' })
+        return response.status(403).send({ erro: 'Operação não é permitida' })
       }
       const data = request.only(["titulo", "sub_titulo", "conteudo"])
 
@@ -208,7 +208,7 @@ class PostController {
         .send({ erro: `Erro: Post não encontrado` })
       }
       if (post.user_id !== auth.user.id) {
-        return response.status(403).send({ message: 'Operação não é permitida' })
+        return response.status(403).send({ erro: 'Operação não é permitida' })
       }
       return await post.delete();
     } catch (err) {
