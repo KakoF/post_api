@@ -4,7 +4,7 @@ const User = use('App/Models/User')
 const { validateAll } = use('Validator')
 class UserController {
   
-  async register ({ request, response }) {
+  async register ({ auth, request, response }) {
     try {
       const validation = await validateAll(request.all(), {
         username: 'required|min:5|unique:users',
@@ -18,7 +18,8 @@ class UserController {
 
       const data = request.only(["username", "email", "password"])
       const user = await User.create(data)
-      return user
+      let token = await auth.generate(user)
+      return token
     } catch (err) {
         return response
           .status(500)
