@@ -33,6 +33,20 @@ class PostController {
     }
   }
 
+  async getPosts ({ response }) {
+    try {
+      const posts = await Post.query()
+        .with('users', (builder) => builder.select('id', 'username').with('profile'))
+        .withCount('comments')
+        .orderBy('created_at', 'desc').fetch()
+      return posts
+    } catch (err) {
+      return response
+        .status(500)
+        .send({ erro: `Erro: ${err.message}` })
+    }
+  }
+
   async posts ({ params, response, auth }) {
     try {
       const posts = await Post.query()

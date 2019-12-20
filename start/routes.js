@@ -26,9 +26,13 @@ Route.get('perfil/:id/:path', 'ImageController.perfil')
 Route.post('refresh', 'UserController.refresh')
 Route.get('logout', 'UserController.logout').middleware('auth')
 Route.get('user', 'UserController.user').middleware('auth')
+Route.get('chartPosts', 'ActivityController.chartPosts').middleware('auth')
 
 
 Route.get('/posts/:page', 'PostController.posts')
+
+Route.get('/posts/', 'PostController.getPosts')
+
 Route.get('perfil/:user_id', 'ProfileController.show')
 
 Route.resource('post', 'PostController').apiOnly().middleware('auth')
